@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\yvesg\\.nuget\\packages\\": {}
+    "C:\\Users\\Yves\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yvesg\\git\\aoc2020\\04\\04.csproj",
+      "projectUniqueName": "C:\\Users\\Yves\\git\\aoc2020\\04\\04.csproj",
       "projectName": "04",
-      "projectPath": "C:\\Users\\yvesg\\git\\aoc2020\\04\\04.csproj",
-      "packagesPath": "C:\\Users\\yvesg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yvesg\\git\\aoc2020\\04\\obj\\",
+      "projectPath": "C:\\Users\\Yves\\git\\aoc2020\\04\\04.csproj",
+      "packagesPath": "C:\\Users\\Yves\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Yves\\git\\aoc2020\\04\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\yvesg\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Yves\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -42,7 +42,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
