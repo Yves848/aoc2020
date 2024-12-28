@@ -64,45 +64,68 @@ void part2()
   int acc = 0;
   int i = 0;
   int i2 = 0;
-  bool change = true;
-  HashSet<int> op = [];
-  while (i < operations.Count)
+
+
+  while (true)
   {
-    
-      if (op.Contains(i))
-      {
-        op.Clear();
-        operations[i2] = (operations[i2].Item1 == "jmp" ? "nop" : "jmp", operations[i2].Item2);
-        acc = 0;
-        i = 0;
-        change = false;
-      }
-    
-    string operation = operations[i].Item1;
-    int value = operations[i].Item2;
-    op.Add(i);
-    switch (operation)
+    List<(string, int)> pmod = [];
+    file.ToList().ForEach(line =>
     {
-      case "acc":
+      pmod.Add((reOp.Match(line).Value, int.Parse(reVal.Match(line).Value)));
+    });
+    while (i < pmod.Count)
+    {
+      if (pmod[i].Item1 == "jmp")
+      {
+        pmod[i] = ("nop", pmod[i].Item2);
+        i++;
+        break;
+      }
+      else
+      {
+        if (pmod[i].Item1 == "nop")
         {
-          
-          acc += value;
+          pmod[i] = ("jmp", pmod[i].Item2);
           i++;
           break;
         }
-      case "nop":
-        {
-          
-          i++;
-          break;
-        }
-      case "jmp":
-        {
-          i2 = i;
-          i += value;
-          break;
-        }
+      }
+      i++;
     }
+
+    int t = 0;
+    i2 = 0;
+    acc = 0;
+    while (i2 < pmod.Count && t < 1000)
+    {
+      string operation = pmod[i2].Item1;
+      int value = pmod[i2].Item2;
+
+      switch (operation)
+      {
+        case "acc":
+          {
+
+            acc += value;
+            i2++;
+            break;
+          }
+        case "nop":
+          {
+
+            i2++;
+            break;
+          }
+        case "jmp":
+          {
+            i2 += value;
+            break;
+          }
+      }
+      
+      t++;
+    }
+    if (i2 == pmod.Count-1) break;
   }
 
   Console.WriteLine($"Part 2 - Answer : {acc}");
