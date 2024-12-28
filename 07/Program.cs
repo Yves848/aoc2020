@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.IO.Pipelines;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text.RegularExpressions;
 
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -45,7 +46,14 @@ bool isValidBag(string color)
 int bagsInMyBag(string color)
 {
   int result = 0;
-  List<(string,int)>
+  List<(string,int)> bags = colors[color];
+  int i = 0;
+  while (i < bags.Count) {
+    result += bags[i].Item2;
+    int nbBags = bagsInMyBag(bags[i].Item1);
+    result += bags[i].Item2 * nbBags;
+    i++;
+  }
   return result;
 }
 
@@ -87,7 +95,7 @@ void print(string str, bool valid)
 void part2()
 {
   int ans = 0;
-
+  ans = bagsInMyBag(myBag);
   Console.WriteLine($"Part 2 - Answer : {ans}");
 }
 
