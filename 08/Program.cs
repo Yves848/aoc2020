@@ -125,7 +125,7 @@ void part2()
       
       t++;
     }
-    if (i2 == pmod.Count-1) break;
+    if (i2 == pmod.Count) break;
   }
 
   Console.WriteLine($"Part 2 - Answer : {acc}");
