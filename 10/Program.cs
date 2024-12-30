@@ -9,7 +9,6 @@ Dictionary<int, int> diffs = [];
 void part1()
 {
   int ans = 0;
-  // jolts.ToList().ForEach(p=>Console.WriteLine(p));
   while (jolts.Count > 0)
   {
     List<int> adapters = jolts.ToList().Where(p => p - ans >= 1 && p - ans <= 3).ToList();
@@ -27,6 +26,8 @@ void part1()
   ans = diffs[1] * (diffs[3]+1);
   Console.WriteLine($"Part 1 - Answer : {ans}");
 }
+
+
 
 void print(string str, bool valid)
 {
