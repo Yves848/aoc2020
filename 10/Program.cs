@@ -6,6 +6,7 @@ var file = args.Length > 0 ? File.ReadAllLines(args[0]) : File.ReadAllLines($"{h
 
 List<int> jolts = file.ToList().Select(p => int.Parse(p)).ToList();
 Dictionary<int, int> diffs = [];
+HashSet<List<int>> combinations = [];
 void part1()
 {
   int ans = 0;
@@ -42,10 +43,22 @@ void print(string str, bool valid)
   Console.Write($"{str} ");
 }
 
+void findAdapter(int index, List<int> list){
+  List<int> adapters = jolts.ToList().Where(p => p - index >= 1 && p - index <= 3).ToList();
+  adapters.Sort();
+  if (adapters.Count > 0) {
+    list.Add(adapters[0]);
+    findAdapter(adapters[0],list);
+    adapters.RemoveAt(0);
+  }
+  combinations.Add(list);
+}
+
 void part2()
 {
+  jolts = file.ToList().Select(p => int.Parse(p)).ToList();
   int ans = 0;
-
+  findAdapter(0,[]);
   Console.WriteLine($"Part 2 - Answer : {ans}");
 }
 
