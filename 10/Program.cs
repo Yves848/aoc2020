@@ -1,12 +1,9 @@
-﻿using System.Security;
-using System.Text.RegularExpressions;
-
-string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+﻿string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 var file = args.Length > 0 ? File.ReadAllLines(args[0]) : File.ReadAllLines($"{home}\\git\\aoc2020\\10\\test.txt");
 
 List<int> jolts = file.ToList().Select(p => int.Parse(p)).ToList();
 Dictionary<int, int> diffs = [];
-HashSet<List<int>> combinations = [];
+List<int> combinations = [];
 void part1()
 {
   int ans = 0;
@@ -43,23 +40,30 @@ void print(string str, bool valid)
   Console.Write($"{str} ");
 }
 
-void findAdapter(int index, List<int> list){
-  List<int> adapters = jolts.ToList().Where(p => p - index >= 1 && p - index <= 3).ToList();
-  adapters.Sort();
-  if (adapters.Count > 0) {
-    list.Add(adapters[0]);
-    findAdapter(adapters[0],list);
-    adapters.RemoveAt(0);
+int findAdapter(int i) {
+  if (i == jolts.Count-1) return 1;
+  if (diffs.ContainsKey(i)) return diffs[i];
+  int ans = 0;
+  int j = i + 1;
+  while (j < jolts.Count) {
+    if (jolts[j]-jolts[i] <=3) ans+= findAdapter(j);
+    j++;
   }
-  combinations.Add(list);
+  if (diffs.ContainsKey(i)) {
+    diffs[i] = ans;
+  } else 
+    diffs.Add(i,ans);
+  return ans;
 }
 
 void part2()
 {
   jolts = file.ToList().Select(p => int.Parse(p)).ToList();
-  int ans = 0;
-  findAdapter(0,[]);
-  Console.WriteLine($"Part 2 - Answer : {ans}");
+  jolts.Insert(0,0);
+  jolts.Sort();
+  jolts.Add(jolts[jolts.Count-1]+3);
+  int result =  findAdapter(0);
+  Console.WriteLine($"Part 2 - Answer : {result}");
 }
 
 part1();
