@@ -121,14 +121,10 @@ void part2()
 
   });
   List<string> temp = [];
+  int i2 = 0;
   while (changed)
   {
-    Console.WriteLine();
-    temp.ToList().ForEach(l =>
-  {
-    Console.WriteLine(l);
 
-  });
     temp.Clear();
     y = 0;
     while (y < h)
@@ -150,8 +146,9 @@ void part2()
               // if (y2 >= 0 && y2 < h && x2 >= 0 && x2 < w)
               while (y2 >= 0 && y2 < h && x2 >= 0 && x2 < w)
               {
-                if (file[y2][x2] == '#' || file[y2][x2] == '#')
+                if (file[y2][x2] == '#' || file[y2][x2] == 'L')
                 {
+                  if (file[y2][x2] == '#')
                   oqp++;
                   break;
                 }
@@ -177,8 +174,9 @@ void part2()
               int y2 = y + yy;
               while (y2 >= 0 && y2 < h && x2 >= 0 && x2 < w)
               {
-                if (file[y2][x2] == '#')
+                if (file[y2][x2] == '#' || file[y2][x2] == 'L')
                 {
+                  if (file[y2][x2] == '#')
                   oqp++;
                   break;
                 }
@@ -200,6 +198,13 @@ void part2()
       temp.Add(line);
       y++;
     }
+    i2++;
+    Console.WriteLine($"---{i2}---");
+    temp.ToList().ForEach(l =>
+  {
+    Console.WriteLine(l);
+
+  });
     y = 0;
     changed = false;
     while (y < temp.Count && !changed)
@@ -210,6 +215,7 @@ void part2()
     file.Clear();
     temp.ToList().ForEach(l => file.Add(l));
   }
+  Console.WriteLine("#####");
   file.ToList().ForEach(l =>
   {
     Console.WriteLine(l);
