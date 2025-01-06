@@ -61,6 +61,7 @@ void part2()
   while (c < na.Count)
   {
     int r = 0;
+    int?[] map = new int?[20];
     HashSet<String> fields = [];
     HashSet<String> fields0 = [];
     while (r < na.Count)
