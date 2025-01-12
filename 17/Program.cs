@@ -3,7 +3,7 @@ using System.Runtime.ExceptionServices;
 using System.Text.RegularExpressions;
 
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-List<string> file = args.Length > 0 ? File.ReadAllLines(args[0]).ToList() : File.ReadAllLines($"{home}\\git\\aoc2020\\17\\test.txt").ToList();
+List<string> file = args.Length > 0 ? File.ReadAllLines(args[0]).ToList() : File.ReadAllLines($"{home}/git/aoc2020/17/test.txt").ToList();
 Dictionary<(int, int, int,int), bool> grid = [];
 List<(int, int, int,int)> directions = [];
 int h = file.Count;
