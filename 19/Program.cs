@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
 
@@ -7,43 +8,46 @@ using System.Text.RegularExpressions;
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 var file = args.Length > 0 ? File.ReadAllText(args[0]) : File.ReadAllText($"{home}/git/aoc2020/19/test.txt");
 var blocs = file.Split("\r\n\r\n");
-Dictionary<int, Item> items = [];
+Dictionary<int, (string,string)> rules = [];
+Dictionary<int, string> letter = [];
 Regex reLine = new(@"\d+");
+Regex reLetter = new(@"""(a|b)""");
 
-string findLetter(int n)
-{
-  string ans = "";
-  if (items[n].t == 1)
-  {
-
-  }
-  else
-  {
-    ans += ((Letter)items[n]).l;
-  }
-  return ans;
-}
-
+List<(int,string)> list = [];
 void part1()
 {
   int ans = 0;
+  // blocs[0].Split("\r\n").ToList().ForEach(l =>
+  // {
+  //   List<string> p = [.. l.Split(":")];
+  //   int num = int.Parse(p[0]);
+  //   if (!reLine.IsMatch(p[1]))
+  //   {
+  //     items.Add(num, new Letter(p[1]));
+  //   }
+  //   else
+  //   {
+  //     items.Add(num, new Rule(p[1]));
+  //   }
+  // });
   blocs[0].Split("\r\n").ToList().ForEach(l =>
   {
-    List<string> p = [.. l.Split(":")];
+    List<string> p = [.. @l.Split(":")];
     int num = int.Parse(p[0]);
-    if (!reLine.IsMatch(p[1]))
+    string right = @p[1].Trim();//.Replace("\"","");
+    if (reLetter.IsMatch(right))
     {
-      items.Add(num, new Letter(p[1]));
+      letter.Add(num,reLetter.Match(l).Groups[1].Value);
     }
     else
     {
-      items.Add(num, new Rule(p[1]));
+      list.Add((num,p[1]));
     }
   });
 
-
-
-  Console.WriteLine();
+  int i = 0;
+  
+  
 
   Console.WriteLine($"Part 1 - Answer : {ans}");
 }
