@@ -15,17 +15,27 @@ class Stack : System.Collections.Generic.List[object] {
 
 }
 
-
-$file = [System.IO.File]::ReadAllText("$PSScriptRoot\test.txt").split("`r`n`r`n");
-Write-SpectreRule -Title " Part 1" -Alignment Center
-
-foreach($line in $file[0].split("`r`n")) {
-  $m = [regex]::Matches($line,"(\d+)")
-  $m.Count
+if ($IsWindows) {
+  $lf = "`r`n"
+} else {
+  $lf = "`n"
 }
 
-$Q = [Stack]::new()
-$Q.push(@{"two" = 2; "coucou" = 23})
-$Q.push("one")
-$Q.pop()
-$Q
+
+$file = [System.IO.File]::ReadAllText("$PSScriptRoot\test.txt").split("$lf$lf");
+Write-SpectreRule -Title " Part 1" -Alignment Center
+
+foreach($line in $file[0].split("$lf")) {
+  $m = [regex]::Matches($line,"(\d+)")
+  $num = $m[0].Value
+  if ([regex]::IsMatch($line,"""")) {
+    Write-Host($line)
+  }
+  $num
+}
+
+# $Q = [Stack]::new()
+# $Q.push(@{"two" = 2; "coucou" = 23})
+# $Q.push("one")
+# $Q.pop()
+# $Q
