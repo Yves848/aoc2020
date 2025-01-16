@@ -7,10 +7,23 @@ function FindRule {
     [int]$r
   )
   if ($letters.ContainsKey([int]$r)) {
+    Write-SpectreRule -Title " letter $r" -Alignment Center -Color Red
     $temp += $letters[$r]
   } else {
     if ($rules.ContainsKey($r)) {
-
+      $rule = $rules[$r]
+      $i = 0;
+      while ($i -lt $rule.Count) {
+        $j = 0;
+        $w = $rule[$i]
+        Write-SpectreRule -Title " rule $w" -Alignment Center
+        while ($j -lt $w.count) {
+          $temp += FindRule -temp $temp -r $w[$j]
+          $j++
+        }
+        $i++
+      }
+      
     }
   }
   return $temp
@@ -24,7 +37,7 @@ foreach($line in $file[0].split("$lf")) {
   $m = [regex]::Matches($line,"(\d+)")
   $num = [int]$m[0].Value
   if ([regex]::IsMatch($line,"""(.)""")) {
-    $letters.Add($num,[regex]::Match($line,"""(.)""").Value)
+    $letters.Add($num,[regex]::Match($line,"""(.)""").Groups[1].Value)
   }
   else {
     $r = [Stack]::new()
@@ -40,7 +53,7 @@ $letters
 Write-SpectreRule -Title " Rules " -Alignment Center -Color Blue
 $rules.GetEnumerator() | Sort-Object Name
 $zero = $rules[0]
-$Q = [Stack]::new()
+# $Q = [Stack]::new()
 # $zero
 
 # $Q.push(@{"ababa" = (12,34); "coucou" = 23})
@@ -48,9 +61,10 @@ $Q = [Stack]::new()
 # $x = $Q.pop()
 # $x
 # $Q
-$n = $zero.pop()
-$n[0]
-$s = FindRule -temp "" -r $n[0]
+$nn = $zero.pop()
+$nn | ForEach-Object {$_
+  $s += FindRule -temp "" -r ([int32]$_)
+}
 $s
 
 

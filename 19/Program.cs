@@ -8,12 +8,12 @@ using System.Text.RegularExpressions;
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 var file = args.Length > 0 ? File.ReadAllText(args[0]) : File.ReadAllText($"{home}/git/aoc2020/19/test.txt");
 var blocs = file.Split("\r\n\r\n");
-Dictionary<int, (string,string)> rules = [];
-Dictionary<int, string> letter = [];
+Dictionary<int, (string, Rule)> rules = [];
+Dictionary<int, Item> letter = [];
 Regex reLine = new(@"\d+");
 Regex reLetter = new(@"""(a|b)""");
 
-List<(int,string)> list = [];
+Dictionary<int, Rule> list = [];
 void part1()
 {
   int ans = 0;
@@ -37,19 +37,42 @@ void part1()
     string right = @p[1].Trim();//.Replace("\"","");
     if (reLetter.IsMatch(right))
     {
-      letter.Add(num,reLetter.Match(l).Groups[1].Value);
+      var l2 = new Letter(reLetter.Match(l).Groups[1].Value);
+      letter.Add(num, l2);
     }
     else
     {
-      list.Add((num,p[1]));
+
+      list.Add(num, new Rule(p[1]));
     }
   });
 
-  int i = 0;
-  
+  var zero = list[0];
+  string temp = "";
+  zero.rules[0].ForEach(z => {
+    temp += findRule("",z);
+  });
   
 
+  Console.WriteLine($"temp : {temp}");
+
+
   Console.WriteLine($"Part 1 - Answer : {ans}");
+}
+
+string findRule(string temp, int i) {
+  if (letter.ContainsKey(i)) {
+    temp += ((Letter)letter[i]).l;
+  }
+   else {
+    var rule = ((Rule)list[i]).rules;
+    rule.ForEach(r => {
+      r.ForEach(ru => {
+        temp += findRule(temp,ru);
+      });
+    });
+   }
+  return temp;
 }
 
 void print(string str, bool valid)
@@ -104,10 +127,10 @@ public class Rule : Item
 
   private void makeRules(string rule)
   {
-    var parts = rule.Split(" | ");
-    parts.ToList().ForEach(r =>
+    var r = rule.Split("|", StringSplitOptions.RemoveEmptyEntries);
+    r.ToList().ForEach(ru =>
     {
-      rules.Add(r.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList().Select(p => int.Parse(p)).ToList());
+      rules.Add([.. ru.Split(" ",StringSplitOptions.RemoveEmptyEntries).ToList().Select(ru => int.Parse(ru))]);
     });
   }
 }
