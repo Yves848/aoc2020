@@ -44,11 +44,11 @@ blocs.ForEach(bloc =>
 void part1()
 {
   int ans = 0;
-  w = (int)Math.Sqrt(Convert.ToDouble(tiles.Count));
   tiles.ToList().ForEach(tile => {
     Console.WriteLine($"Tile {tile.Key}");
     tile.Value.Item1.ForEach(line => Console.WriteLine(line));
   });
+  w = (int)Math.Sqrt(Convert.ToDouble(tiles.Count));
   Console.WriteLine($"Part 1 - Answer : {ans}");
 }
 
