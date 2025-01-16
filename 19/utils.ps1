@@ -3,10 +3,10 @@ class Stack : System.Collections.Generic.List[object] {
     [ordered]@{}
   }
   
-  pop() {
+  [object] pop() {
    $value = $this[$this.Count-1]
    $this.RemoveAt($this.Count-1)
-   $value  
+   return $value  
   }
 
   push($value) {
