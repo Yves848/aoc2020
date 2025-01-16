@@ -1,0 +1,15 @@
+/home/yves/git/aoc2020/20/bin/Debug/net9.0/20
+/home/yves/git/aoc2020/20/bin/Debug/net9.0/20.deps.json
+/home/yves/git/aoc2020/20/bin/Debug/net9.0/20.runtimeconfig.json
+/home/yves/git/aoc2020/20/bin/Debug/net9.0/20.dll
+/home/yves/git/aoc2020/20/bin/Debug/net9.0/20.pdb
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.GeneratedMSBuildEditorConfig.editorconfig
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.AssemblyInfoInputs.cache
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.AssemblyInfo.cs
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.csproj.CoreCompileInputs.cache
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.sourcelink.json
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.dll
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/refint/20.dll
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.pdb
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/20.genruntimeconfig.cache
+/home/yves/git/aoc2020/20/obj/Debug/net9.0/ref/20.dll
